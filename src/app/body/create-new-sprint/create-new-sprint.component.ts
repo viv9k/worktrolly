@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Organizations } from 'src/app/Interface/OrganizationInterface';
 import { ApplicationSettingsService } from 'src/app/services/applicationSettings/application-settings.service';
 import { Sprint, TeamDataId } from 'src/app/Interface/TeamInterface';
+import { ToolsService } from 'src/app/services/tool/tools.service';
 
 @Component({
   selector: 'app-create-new-sprint',
@@ -49,12 +50,14 @@ export class CreateNewSprintComponent implements OnInit {
 
   nextSprintId: number;
   showContent: boolean;
+  todayDate: string;
 
-  constructor(private applicationSettingsService: ApplicationSettingsService, private db: AngularFirestore, private functions: AngularFireFunctions, private router: Router, public validationService: ValidationService, private location: Location, public navbarHandler: NavbarHandlerService, public errorHandlerService: ErrorHandlerService, private backendService: BackendService, private authService: AuthService) { }
+  constructor(private applicationSettingsService: ApplicationSettingsService, private db: AngularFirestore, private functions: AngularFireFunctions, private router: Router, public validationService: ValidationService, private location: Location, public navbarHandler: NavbarHandlerService, public errorHandlerService: ErrorHandlerService, private backendService: BackendService, private authService: AuthService, public toolsService: ToolsService) { }
 
   ngOnInit(): void {
     this.navbarHandler.resetNavbar();
     this.navbarHandler.addToNavbar(this.componentName);
+    this.todayDate = this.toolsService.date().split('/').reverse().join('-');
 
     this.authService.afauth.user.subscribe(data =>{
       this.authService.userAppSettingObservable.subscribe(data => {
@@ -87,15 +90,6 @@ export class CreateNewSprintComponent implements OnInit {
 
       this.showContent = true;
     });
-  }
-
-  loadSprintData() {
-    this.teamData.forEach(element => {
-      if(element.TeamId == this.selectedTeamId) {
-        this.nextSprintId = element.CurrentSprintId+1;
-      }
-    });
-    this.readSprintData();
   }
 
   async submit() {

@@ -18,6 +18,9 @@
         </div>
         <div class="px-5">
             <form (ngSubmit)="submit()" #form="ngForm">
+                <div class="form-row pt-2">
+                    <h5>{{selectedTeamId}}</h5>
+                </div>
                 <div class="form-group row pt-2">
                     <div class="alert form-inline w-50 col-md-3 pb-3" style="font-size: 20px;" role="alert">
                         <div style="font-weight: bold;" class="pr-3">Sprint:</div>
@@ -26,7 +29,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="input">{{selectedTeamId}}</label>
                         <div class="alert form-inline" id="detail" role="alert">
                             <div style="font-weight: bold;" class="pr-3"> No. of Task:</div>
                             <div class="ml-auto">
@@ -41,11 +43,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="input">Start Date</label>
-                        <input class="form-control" type="date" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}">
+                        <input class="form-control" type="date" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" min="{{todayDate}}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="input">End Date</label>
-                        <input class="form-control" type="date" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
+                        <input class="form-control" type="date" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" min="{{todayDate}}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputState">Status</label>
@@ -58,11 +60,8 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputState">TeamId</label>
-                        <select class="form-control" [(ngModel)]="selectedTeamId" [ngModelOptions]="{standalone: true}" (ngModelChange)="loadSprintData()">
-                            <option>Dev</option>
-                            <option>Bus</option>
-                            <option>Mar</option>
-                            <option>Oth</option>
+                        <select class="form-control" [(ngModel)]="selectedTeamId" [ngModelOptions]="{standalone: true}" (ngModelChange)="readApplicationData()">
+                            <option *ngFor="let team of teams">{{team}}</option>
                         </select>
                     </div>
                 </div>
