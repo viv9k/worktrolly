@@ -60,6 +60,7 @@ import { Patch2Component } from './patches/patch2/patch2.component';
 import { Patch3Component } from './patches/patch3/patch3.component';
 import { UpdateFieldComponent } from './patches/patch3/update-field/update-field.component';
 import { ProfileIconsComponent } from './icons/profile-icons/profile-icons.component';
+import { SuggestionBucketComponent } from './body/common-tools/suggestion-bucket/suggestion-bucket.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { ProfileIconsComponent } from './icons/profile-icons/profile-icons.compo
     Patch3Component,
     UpdateFieldComponent,
     ProfileIconsComponent,
+    SuggestionBucketComponent,
   ],
   imports: [
     BrowserModule,

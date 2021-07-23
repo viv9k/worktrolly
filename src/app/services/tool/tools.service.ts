@@ -26,4 +26,10 @@ export class ToolsService {
     return this.todayTime = hh + ":" + mn + ":" + ss;
   }
 
+  userName(name: string){
+    let startindex = name.indexOf('<')
+    let endindex = name.indexOf('>')
+    return name.substring(startindex+1,endindex);
+  }
+
 }

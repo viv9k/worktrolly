@@ -49,8 +49,10 @@
                         <label for="input">Assignee</label>
                         <input type="text" class="form-control" [(ngModel)]="assigneeName" [ngModelOptions]="{standalone: true}" list="assigneeSuggestion">
                             <datalist id="assigneeSuggestion">
-                                <ng-container *ngFor='let member of teamMembers'>
-                                    <option>{{ member }}</option>
+                                <ng-container *ngFor='let item of teamMembers '>
+                                    <option>
+                                        <app-suggestion-bucket [email]="item"></app-suggestion-bucket>
+                                    </option>
                                 </ng-container>
                             </datalist>
                     </div>

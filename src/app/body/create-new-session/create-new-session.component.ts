@@ -50,8 +50,8 @@ export class CreateNewSessionComponent implements OnInit {
     this.navbarHandler.resetNavbar();
     this.navbarHandler.addToNavbar(this.componentName);
     this.teamIds=this.backendService.getOrganizationTeamIds();
-    this.readTeamMembers(this.teamIds[0]);
-    this.project=this.teamIds[0];
+    this.project = this.authService.getTeamId();
+    this.readTeamMembers(this.project);
     this.todayDate = this.toolsService.date();
     this.time = this.toolsService.time();
     this.task= this.cloneTask.getCloneData();
@@ -73,7 +73,7 @@ export class CreateNewSessionComponent implements OnInit {
     }); 
   }
   async submit() {
-    console.log(this.teamName);
+    this.assigneeName = this.toolsService.userName(this.assigneeName);
     let data = [{ label: "title", value: this.title },
     { label: "status", value: this.status },
     { label: "priority", value: this.priority },
