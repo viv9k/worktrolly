@@ -14,6 +14,7 @@ export class PieChartComponent implements OnInit {
   
 type='PieChart';
 options={
+  backgroundColor:'none'    ,
   pieHole:0.6,
   pieSliceText:'none',
   legend:'none',
